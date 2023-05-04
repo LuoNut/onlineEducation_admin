@@ -194,12 +194,18 @@ async function postLogin (params = {}) {
     last_login_ip: clientIP,
     ...extraData
   }
-  const {
-    token,
-    tokenExpired
-  } = await this.uniIdCommon.createToken({
+   const createTokenRes = await this.uniIdCommon.createToken({
     uid
   })
+
+  const {
+    errCode,
+    token,
+    tokenExpired
+  } = createTokenRes
+  if (errCode) {
+    throw createTokenRes
+  }
 
   if (uniIdToken) {
     try {

@@ -88,7 +88,7 @@ module.exports = async function (params = {}) {
     if (weixinPlatform !== 'mp') {
       throw new Error('Unsupported weixin platform, expect mp-weixin')
     }
-    await saveSecureNetworkCache({
+    await saveSecureNetworkCache.call(this, {
       code,
       openid,
       unionid,

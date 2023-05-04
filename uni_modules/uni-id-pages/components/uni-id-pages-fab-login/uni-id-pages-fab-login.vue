@@ -7,9 +7,6 @@
 				<text class="login-title">{{item.text}}</text>
 			</view>
 		</view>
-		<!-- #ifdef MP-WEIXIN -->
-		<uni-id-pages-user-profile @next="doUserProfileNext" ref="userProfile"></uni-id-pages-user-profile>
-		<!-- #endif -->
 	</view>
 </template>
 <script>
@@ -65,6 +62,7 @@
 						"text": "微信登录",
 						"logo": "/uni_modules/uni-id-pages/static/login/uni-fab-login/weixin.png",
 					},
+					// #ifndef MP-WEIXIN
 					{
 						"id": "apple",
 						"text": "苹果登录",
@@ -110,6 +108,7 @@
 						"text": "新浪微博", //暂未提供该登录方式的接口示例
 						"logo": "/uni_modules/uni-id-pages/static/app-plus/uni-fab-login/sinaweibo.png",
 					}
+					// #endif
 				],
 				univerifyStyle: { //一键登录弹出窗的样式配置参数
 					"fullScreen": true, // 是否全屏显示，true表示全屏模式，false表示非全屏模式，默认值为false。
@@ -295,10 +294,25 @@
 				// #ifdef H5
 					if(type == 'weixin'){
 						// console.log('开始微信网页登录');
-						let redirectUrl = location.protocol +'//'+
-										document.domain +
-										(window.location.href.includes('#')?'/#':'') +
-										'/uni_modules/uni-id-pages/pages/login/login-withoutpwd?is_weixin_redirect=true&type=weixin'
+						// let redirectUrl = location.protocol +'//'+
+						// 				document.domain +
+						// 				(window.location.href.includes('#')?'/#':'') +
+						// 				'/uni_modules/uni-id-pages/pages/login/login-withoutpwd?is_weixin_redirect=true&type=weixin'
+            // #ifdef VUE2
+            const baseUrl = process.env.BASE_URL
+            // #endif
+            // #ifdef VUE3
+            const baseUrl = import.meta.env.BASE_URL
+            // #endif
+
+            let redirectUrl = location.protocol +
+                '//' +
+                location.host +
+                baseUrl.replace(/\/$/, '') +
+                (window.location.href.includes('#')?'/#':'') +
+                '/uni_modules/uni-id-pages/pages/login/login-withoutpwd?is_weixin_redirect=true&type=weixin'
+
+						// console.log('redirectUrl----',redirectUrl);
 						let ua = window.navigator.userAgent.toLowerCase();
 						if (ua.match(/MicroMessenger/i) == 'micromessenger'){
 							// console.log('在微信公众号内');
@@ -328,9 +342,14 @@
 					let onButtonsClickFn = async res => {
 						console.log('点击了第三方登录，provider：', res, res.provider, this.univerifyStyle.buttons.list);
 						clickAnotherButtons = true
+						let checkBoxState = await uni.getCheckBoxState();
 						// 同步一键登录弹出层隐私协议框是否打勾
-						let agree = (await uni.getCheckBoxState())[1].state
-						this.agree = agree
+						// #ifdef VUE2
+						this.agree = checkBoxState[1].state
+						// #endif
+						// #ifdef VUE3
+						this.agree = checkBoxState.state
+						// #endif
 						let {
 							path
 						} = this.univerifyStyle.buttons.list[res.index]
@@ -341,7 +360,7 @@
 							this.toPage(path,1)
 							closeUniverify()
 						} else {
-							if (agree) {
+							if (this.agree) {
 								closeUniverify()
 								setTimeout(() => {
 									this.login_before(res.provider)
@@ -435,17 +454,6 @@
 						icon: 'none',
 						duration: 2000
 					});
-					// #ifdef MP-WEIXIN
-					//如果是微信小程序端的微信登录，且为首次登录，就弹出获取微信昵称+头像用于绑定资料
-					if (['weixin', 'weixinMobile'].includes(type) && result.type == "register") {
-						mutations.loginSuccess({
-							...result,
-							showToast: false,
-							autoBack: false
-						})
-						return this.$refs.userProfile.open(result.uid)
-					}
-					// #endif
 					// #ifdef H5
 					result.loginType = type
 					// #endif
@@ -464,13 +472,6 @@
 					}
 					uni.hideLoading()
 				})
-			},
-			doUserProfileNext() {
-				try {
-					mutations.loginSuccess()
-				} catch (e) {
-					console.log(e);
-				}
 			},
 			async getUserInfo(e) {
 				return new Promise((resolve, reject) => {

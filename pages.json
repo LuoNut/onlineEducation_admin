@@ -190,6 +190,22 @@
         "navigationBarTitleText": "列表"
     }
 }
+    ,{
+            "path" : "pages/auditTeacher/auditTeacher",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ,{
+    "path": "uni_modules/uni-id-pages/pages/userinfo/realname-verify/realname-verify",
+    "style": {
+        "enablePullDownRefresh": false,
+        "navigationBarTitleText": "实名认证"
+    }
+}
 ],
 	"subPackages": [{
 			"root": "pages/system",
