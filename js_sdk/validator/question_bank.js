@@ -5,15 +5,30 @@ const validator = {
   "user_id": {
     "rules": [
       {
-        "required": true
-      },
-      {
         "format": "string"
       }
     ],
     "defaultValue": {
       "$env": "uid"
     }
+  },
+  "subject_type_one": {
+    "rules": [
+      {
+        "format": "string"
+      }
+    ],
+    "title": " ",
+    "label": " "
+  },
+  "subject_type_two": {
+    "rules": [
+      {
+        "format": "string"
+      }
+    ],
+    "title": "题目小类型",
+    "label": "题目小类型"
   },
   "title": {
     "rules": [
@@ -24,62 +39,98 @@ const validator = {
         "format": "string"
       }
     ],
-    "label": "标题",
-    "title": "标题"
+    "label": "题目",
+    "title": "题目"
   },
-  "content": {
-    "rules": [
-      {
-        "required": true
-      },
-      {
-        "format": "string"
-      }
-    ],
-    "label": "文章内容",
-    "title": "文章内容"
-  },
-  "avatar": {
+  "src_title": {
     "rules": [
       {
         "format": "file"
       }
     ],
-    "title": "封面大图",
-    "label": "封面大图"
+    "title": "题目类型",
+    "label": "题目类型"
   },
-  "publish_date": {
+  "isimg": {
     "rules": [
       {
-        "format": "timestamp"
+        "format": "int"
       }
     ],
-    "title": "发表时间",
-    "defaultValue": {
-      "$env": "now"
-    },
-    "label": "发表时间"
+    "title": "题目类型",
+    "defaultValue": 1,
+    "label": "题目类型"
   },
-  "last_modify_date": {
+  "code": {
     "rules": [
       {
-        "format": "timestamp"
+        "required": true
+      },
+      {
+        "format": "int"
       }
     ],
-    "title": "最后修改时间",
-    "defaultValue": {
-      "$env": "now"
-    },
-    "label": "最后修改时间"
+    "title": "题型",
+    "defaultValue": 1,
+    "label": "题型"
   },
-  "mode": {
+  "option": {
     "rules": [
       {
-        "format": "number"
+        "format": "array"
       }
     ],
-    "title": "排版显示模式",
-    "label": "排版显示模式"
+    "title": "选项",
+    "label": "选项"
+  },
+  "true_option": {
+    "rules": [
+      {
+        "required": true
+      },
+      {
+        "format": "array"
+      }
+    ],
+    "title": "正确选项",
+    "label": "正确选项"
+  },
+  "current": {
+    "rules": [
+      {
+        "format": "array"
+      }
+    ],
+    "title": "当前所选",
+    "label": "当前所选"
+  },
+  "topic": {
+    "rules": [
+      {
+        "format": "bool"
+      }
+    ],
+    "title": "所选是否正确 默认为'' true为正确 控制选项高亮",
+    "label": "所选是否正确 默认为'' true为正确 控制选项高亮"
+  },
+  "code2": {
+    "rules": [
+      {
+        "format": "bool"
+      }
+    ],
+    "title": "选项选择状态 默认为true false为选择",
+    "defaultValue": true,
+    "label": "选项选择状态 默认为true false为选择"
+  },
+  "alt": {
+    "rules": [
+      {
+        "format": "string"
+      }
+    ],
+    "title": "本题描述",
+    "label": "本题描述"
   }
 }
 

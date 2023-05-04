@@ -16,30 +16,35 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="user_id,title,content,avatar,publish_date,last_modify_date,mode" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="user_id,subject_type_one,subject_type_two,title,src_title,isimg,code,option,true_option,current,topic,code2,alt" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'user_id')">user_id</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'title')" sortable @sort-change="sortChange($event, 'title')">标题</uni-th>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'avatar')">封面大图</uni-th>
-            <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'publish_date')" sortable @sort-change="sortChange($event, 'publish_date')">发表时间</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'subject_type_one')" sortable @sort-change="sortChange($event, 'subject_type_one')">题目大类 </uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'subject_type_two')" sortable @sort-change="sortChange($event, 'subject_type_two')">题目小类</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'title')" sortable @sort-change="sortChange($event, 'title')">题目</uni-th>
+            <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'code')" sortable @sort-change="sortChange($event, 'code')">题型</uni-th>
+            <uni-th align="center" sortable @sort-change="sortChange($event, 'true_option')">正确选项</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'alt')" sortable @sort-change="sortChange($event, 'alt')">本题答案描述</uni-th>
             <uni-th align="center">操作</uni-th>
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
-            <uni-td align="center">{{item.user_id}}</uni-td>
-            <uni-td align="center">{{item.title}}</uni-td>
+            <uni-td align="center">{{item.subject_type_one}}</uni-td>
+            <uni-td align="center">{{item.subject_type_two}}</uni-td>
             <uni-td align="center">
-              <uni-file-picker v-if="item.avatar && item.avatar.fileType == 'image'" :value="item.avatar" :file-mediatype="item.avatar && item.avatar.fileType" return-type="object" :imageStyles="imageStyles" readonly></uni-file-picker>
-              <uni-link v-else :href="item.avatar && item.avatar.url" :text="item.avatar && item.avatar.url"></uni-link>
-            </uni-td>
-            <uni-td align="center">
-              <uni-dateformat :threshold="[0, 0]" :date="item.publish_date"></uni-dateformat>
-            </uni-td>
-            <uni-td align="center">
-              <uni-dateformat :threshold="[0, 0]" :date="item.last_modify_date"></uni-dateformat>
-            </uni-td>
+				<view v-if="!item.src_title" >
+					{{item.title}}
+				</view>
+				<view v-else >
+					<uni-file-picker v-if="item.src_title && item.src_title.fileType == 'image'" :value="item.src_title" :file-mediatype="item.src_title && item.src_title.fileType" return-type="object" :imageStyles="imageStyles" readonly></uni-file-picker>
+					<uni-link v-else :href="item.src_title && item.src_title.url" :text="item.src_title && item.src_title.url"></uni-link>
+				</view>
+			</uni-td>
+			
+            <uni-td align="center">{{item.code == 1 ? "单选题" : "多选题"}}</uni-td>
+            <uni-td align="center">{{item.true_option}}</uni-td>
+            <uni-td align="center">{{item.alt}}</uni-td>
             <uni-td align="center">
               <view class="uni-group">
                 <button @click="navigateTo('./edit?id='+item._id, false)" class="uni-button" size="mini" type="primary">修改</button>
@@ -57,7 +62,7 @@
 </template>
 
 <script>
-  import { enumConverter, filterToWhere } from '../../js_sdk/validator/inform.js';
+  import { enumConverter, filterToWhere } from '../../js_sdk/validator/question_bank.js';
 
   const db = uniCloud.database()
   // 表查询配置
@@ -75,7 +80,7 @@
   export default {
     data() {
       return {
-        collectionList: "inform",
+        collectionList: "question_bank",
         query: '',
         where: '',
         orderby: dbOrderBy,
@@ -92,16 +97,21 @@
           height: 64
         },
         exportExcel: {
-          "filename": "inform.xls",
+          "filename": "question_bank.xls",
           "type": "xls",
           "fields": {
             "user_id": "user_id",
-            "标题": "title",
-            "文章内容": "content",
-            "封面大图": "avatar",
-            "发表时间": "publish_date",
-            "最后修改时间": "last_modify_date",
-            "排版显示模式": "mode"
+            " ": "subject_type_one",
+            "题目小类型": "subject_type_two",
+            "题目": "title",
+            "题目类型": "isimg",
+            "题型": "code",
+            "选项": "option",
+            "正确选项": "true_option",
+            "当前所选": "current",
+            "所选是否正确 默认为'' true为正确 控制选项高亮": "topic",
+            "选项选择状态 默认为true false为选择": "code2",
+            "本题描述": "alt"
           }
         },
         exportExcelData: []

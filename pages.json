@@ -172,6 +172,24 @@
         "navigationBarTitleText": "列表"
     }
 }
+,{
+    "path": "pages/question_bank/add",
+    "style": {
+        "navigationBarTitleText": "新增"
+    }
+}
+,{
+    "path": "pages/question_bank/edit",
+    "style": {
+        "navigationBarTitleText": "编辑"
+    }
+}
+,{
+    "path": "pages/question_bank/list",
+    "style": {
+        "navigationBarTitleText": "列表"
+    }
+}
 ],
 	"subPackages": [{
 			"root": "pages/system",

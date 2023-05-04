@@ -23,13 +23,17 @@
           <uni-tr>
             <uni-th align="center" sortable @sort-change="sortChange($event, 'user_id')">user_id</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'title')" sortable @sort-change="sortChange($event, 'title')">标题</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'content')" sortable @sort-change="sortChange($event, 'content')">文章内容</uni-th>
             <uni-th align="center" sortable @sort-change="sortChange($event, 'avatar')">封面大图</uni-th>
             <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'publish_date')" sortable @sort-change="sortChange($event, 'publish_date')">发表时间</uni-th>
+            <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'last_modify_date')" sortable @sort-change="sortChange($event, 'last_modify_date')">最后修改时间</uni-th>
+            <uni-th align="center" sortable @sort-change="sortChange($event, 'mode')">排版显示模式</uni-th>
             <uni-th align="center">操作</uni-th>
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
             <uni-td align="center">{{item.user_id}}</uni-td>
             <uni-td align="center">{{item.title}}</uni-td>
+            <uni-td align="center">{{item.content}}</uni-td>
             <uni-td align="center">
               <uni-file-picker v-if="item.avatar && item.avatar.fileType == 'image'" :value="item.avatar" :file-mediatype="item.avatar && item.avatar.fileType" return-type="object" :imageStyles="imageStyles" readonly></uni-file-picker>
               <uni-link v-else :href="item.avatar && item.avatar.url" :text="item.avatar && item.avatar.url"></uni-link>
@@ -40,6 +44,7 @@
             <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.last_modify_date"></uni-dateformat>
             </uni-td>
+            <uni-td align="center">{{item.mode}}</uni-td>
             <uni-td align="center">
               <view class="uni-group">
                 <button @click="navigateTo('./edit?id='+item._id, false)" class="uni-button" size="mini" type="primary">修改</button>

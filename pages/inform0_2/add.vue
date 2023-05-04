@@ -1,26 +1,27 @@
 <template>
   <view class="uni-container">
     <uni-forms ref="form" :model="formData" validateTrigger="bind">
+      <uni-forms-item name="user_id" label="" required>
+        <uni-easyinput placeholder="文章作者ID， 参考`uni-id-users` 表" v-model="formData.user_id"></uni-easyinput>
+      </uni-forms-item>
       <uni-forms-item name="title" label="标题" required>
         <uni-easyinput placeholder="标题" v-model="formData.title" trim="both"></uni-easyinput>
       </uni-forms-item>
-      <uni-forms-item name="content" label="内容" required>
-		   <webEdit :editData="formData.content" v-model="formData.content" ids="content"></webEdit>
-		   <view class="">
-		   </view>
-        <!-- <uni-easyinput placeholder="文章内容" v-model="formData.content" trim="right"></uni-easyinput> -->
+      <uni-forms-item name="content" label="文章内容" required>
+        <uni-easyinput placeholder="文章内容" v-model="formData.content" trim="right"></uni-easyinput>
       </uni-forms-item>
-<!--      <uni-forms-item name="avatar" label="封面">
-        <uni-easyinput placeholder="缩略图地址" v-model="formData.avatar" trim="both"></uni-easyinput>
-      </uni-forms-item> -->
-	  
-<!-- 	  <uni-forms-item name="avatar" label="标题封面">
-	    <uni-file-picker file-mediatype="image" return-type="object" v-model="formData.avatar"></uni-file-picker>
-	  </uni-forms-item> -->
-	  <uni-forms-item name="avatar" label="封面大图">
-	    <uni-file-picker :image-styles="imageStyles" file-mediatype="image" return-type="object" v-model="formData.avatar"></uni-file-picker>
-	  </uni-forms-item>
-	  
+      <uni-forms-item name="avatar" label="封面大图">
+        <uni-file-picker file-mediatype="image" return-type="object" v-model="formData.avatar"></uni-file-picker>
+      </uni-forms-item>
+      <uni-forms-item name="publish_date" label="发表时间">
+        <uni-datetime-picker return-type="timestamp" v-model="formData.publish_date"></uni-datetime-picker>
+      </uni-forms-item>
+      <uni-forms-item name="last_modify_date" label="最后修改时间">
+        <uni-datetime-picker return-type="timestamp" v-model="formData.last_modify_date"></uni-datetime-picker>
+      </uni-forms-item>
+      <uni-forms-item name="mode" label="排版显示模式">
+        <undefined v-model="formData.mode"></undefined>
+      </uni-forms-item>
       <view class="uni-button-group">
         <button type="primary" class="uni-button" style="width: 100px;" @click="submit">提交</button>
         <navigator open-type="navigateBack" style="margin-left: 15px;">
@@ -66,19 +67,7 @@
         formOptions: {},
         rules: {
           ...getValidator(Object.keys(formData))
-        },
-		
-		imageStyles:{                          //图片上传框的样式
-						width:200,
-						height:200,
-					},
-      }
-    },
-    onLoad(e) {
-      if (e.id) {
-        const id = e.id
-        this.formDataId = id
-        this.getDetail(id)
+        }
       }
     },
     onReady() {
@@ -106,9 +95,9 @@
        */
       submitForm(value) {
         // 使用 clientDB 提交数据
-        return db.collection(dbCollectionName).doc(this.formDataId).update(value).then((res) => {
+        return db.collection(dbCollectionName).add(value).then((res) => {
           uni.showToast({
-            title: '修改成功'
+            title: '新增成功'
           })
           this.getOpenerEventChannel().emit('refreshData')
           setTimeout(() => uni.navigateBack(), 500)
@@ -118,44 +107,7 @@
             showCancel: false
           })
         })
-      },
-
-      /**
-       * 获取表单数据
-       * @param {Object} id
-       */
-      getDetail(id) {
-        uni.showLoading({
-          mask: true
-        })
-        db.collection(dbCollectionName).doc(id).field("user_id,title,content,avatar,publish_date,last_modify_date,mode").get().then((res) => {
-          const data = res.result.data[0]
-          if (data) {
-            this.formData = data
-            
-          }
-        }).catch((err) => {
-          uni.showModal({
-            content: err.message || '请求服务失败',
-            showCancel: false
-          })
-        }).finally(() => {
-          uni.hideLoading()
-        })
       }
     }
   }
 </script>
-
-<style lang="scss" scoped >
-	.uni-app--showleftwindow .uni-container .uni-forms {
-	    padding: 15px;
-	    max-width: 100%;
-	}
-	/deep/ .uni-forms-item__label {
-		width: 160rpx;
-	}
-	/deep/ .file-picker__box {
-		width: 300px;
-	}
-</style>
