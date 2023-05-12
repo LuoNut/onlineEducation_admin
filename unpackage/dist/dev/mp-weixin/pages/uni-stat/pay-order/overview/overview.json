@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "订单概况",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-stat-breadcrumb": "/components/uni-stat-breadcrumb/uni-stat-breadcrumb",
+    "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
+    "uni-stat-tabs": "/components/uni-stat-tabs/uni-stat-tabs",
+    "fix-window": "/components/fix-window/fix-window",
+    "stat-panel-total": "/pages/uni-stat/pay-order/overview/components/statPanelTotal",
+    "stat-panel-today": "/pages/uni-stat/pay-order/overview/components/statPanelToday",
+    "trend-chart": "/pages/uni-stat/pay-order/overview/components/trendChart"
+  }
+}

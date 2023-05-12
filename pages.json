@@ -206,6 +206,24 @@
         "navigationBarTitleText": "实名认证"
     }
 }
+,{
+    "path": "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/add",
+    "style": {
+        "navigationBarTitleText": "新增"
+    }
+}
+,{
+    "path": "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/edit",
+    "style": {
+        "navigationBarTitleText": "编辑"
+    }
+}
+,{
+    "path": "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/list",
+    "style": {
+        "navigationBarTitleText": "列表"
+    }
+}
 ],
 	"subPackages": [{
 			"root": "pages/system",
