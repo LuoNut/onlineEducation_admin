@@ -8,7 +8,6 @@
       <view class="uni-group">
         <input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="请输入搜索内容" />
         <button class="uni-button" type="default" size="mini" @click="search">搜索</button>
-        <button class="uni-button" type="default" size="mini" @click="navigateTo('./add')">新增</button>
         <button class="uni-button" type="default" size="mini" :disabled="!selectedIndexs.length" @click="delTable">批量删除</button>
         <download-excel class="hide-on-phone" :fields="exportExcel.fields" :data="exportExcelData" :type="exportExcel.type" :name="exportExcel.filename">
           <button class="uni-button" type="primary" size="mini">导出 Excel</button>
@@ -16,38 +15,36 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="user_id,title,content,avatar,publish_date,last_modify_date,mode" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="user_id,course_name,courseCover,subject_type_one,subject_type_two,course_intro,courseware,course_video,view_count,like_count,comment_count,picurls,publish_date,course_video_num,course_time,last_modify_date" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'user_id')">user_id</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'title')" sortable @sort-change="sortChange($event, 'title')">标题</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'content')" sortable @sort-change="sortChange($event, 'content')">文章内容</uni-th>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'avatar')">封面大图</uni-th>
-            <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'publish_date')" sortable @sort-change="sortChange($event, 'publish_date')">发表时间</uni-th>
-            <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'last_modify_date')" sortable @sort-change="sortChange($event, 'last_modify_date')">最后修改时间</uni-th>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'mode')">排版显示模式</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'course_name')" sortable @sort-change="sortChange($event, 'course_name')">课程名称</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'courseCover')" sortable @sort-change="sortChange($event, 'courseCover')">课程封面</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'subject_type_one')" sortable @sort-change="sortChange($event, 'subject_type_one')">课程大类型</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'subject_type_two')" sortable @sort-change="sortChange($event, 'subject_type_two')">课程小类型</uni-th>
+            <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'view_count')" sortable @sort-change="sortChange($event, 'view_count')">阅读数量</uni-th>
+            <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'like_count')" sortable @sort-change="sortChange($event, 'like_count')">收藏量</uni-th>
+            <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'comment_count')" sortable @sort-change="sortChange($event, 'comment_count')">发布时间</uni-th>
+            
             <uni-th align="center">操作</uni-th>
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
-            <uni-td align="center">{{item.user_id}}</uni-td>
-            <uni-td align="center">{{item.title}}</uni-td>
-            <uni-td align="center">{{item.content}}</uni-td>
-            <uni-td align="center">
-              <uni-file-picker v-if="item.avatar && item.avatar.fileType == 'image'" :value="item.avatar" :file-mediatype="item.avatar && item.avatar.fileType" return-type="object" :imageStyles="imageStyles" readonly></uni-file-picker>
-              <uni-link v-else :href="item.avatar && item.avatar.url" :text="item.avatar && item.avatar.url"></uni-link>
-            </uni-td>
+            <uni-td align="center">{{item.course_name}}</uni-td>
+            <uni-td align="center"><image :src="item.courseCover" style="width: 53px; height: 53px;" mode="aspectFit" ></image></uni-td>
+            <uni-td align="center">{{item.subject_type_one}}</uni-td>
+            <uni-td align="center">{{item.subject_type_two}}</uni-td>
+            <uni-td align="center">{{item.view_count}}</uni-td>
+            <uni-td align="center">{{item.like_count}}</uni-td>
             <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.publish_date"></uni-dateformat>
             </uni-td>
             <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.last_modify_date"></uni-dateformat>
             </uni-td>
-            <uni-td align="center">{{item.mode}}</uni-td>
             <uni-td align="center">
               <view class="uni-group">
-                <button @click="navigateTo('./edit?id='+item._id, false)" class="uni-button" size="mini" type="primary">修改</button>
                 <button @click="confirmDelete(item._id)" class="uni-button" size="mini" type="warn">删除</button>
               </view>
             </uni-td>
@@ -62,7 +59,7 @@
 </template>
 
 <script>
-  import { enumConverter, filterToWhere } from '../../js_sdk/validator/inform.js';
+  import { enumConverter, filterToWhere } from '../../js_sdk/validator/course_video.js';
 
   const db = uniCloud.database()
   // 表查询配置
@@ -80,7 +77,7 @@
   export default {
     data() {
       return {
-        collectionList: "inform",
+        collectionList: "course_video",
         query: '',
         where: '',
         orderby: dbOrderBy,
@@ -97,16 +94,25 @@
           height: 64
         },
         exportExcel: {
-          "filename": "inform.xls",
+          "filename": "course_video.xls",
           "type": "xls",
           "fields": {
             "user_id": "user_id",
-            "标题": "title",
-            "文章内容": "content",
-            "封面大图": "avatar",
+            "课程名称": "course_name",
+            "课程封面": "courseCover",
+            "课程大类型": "subject_type_one",
+            "课程小类型": "subject_type_two",
+            "课程简介": "course_intro",
+            "课程课件": "courseware",
+            "课程视频": "course_video",
+            "阅读数量": "view_count",
+            "like_count": "like_count",
+            "comment_count": "comment_count",
+            "封面大图": "picurls",
             "发表时间": "publish_date",
-            "最后修改时间": "last_modify_date",
-            "排版显示模式": "mode"
+            "课程视频数量": "course_video_num",
+            "课程总时间": "course_time",
+            "最后修改时间": "last_modify_date"
           }
         },
         exportExcelData: []

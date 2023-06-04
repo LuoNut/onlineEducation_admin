@@ -102,28 +102,28 @@ var components
 try {
   components = {
     uniStatBreadcrumb: function () {
-      return Promise.all(/*! import() | components/uni-stat-breadcrumb/uni-stat-breadcrumb */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-stat-breadcrumb/uni-stat-breadcrumb")]).then(__webpack_require__.bind(null, /*! @/components/uni-stat-breadcrumb/uni-stat-breadcrumb.vue */ 725))
+      return Promise.all(/*! import() | components/uni-stat-breadcrumb/uni-stat-breadcrumb */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-stat-breadcrumb/uni-stat-breadcrumb")]).then(__webpack_require__.bind(null, /*! @/components/uni-stat-breadcrumb/uni-stat-breadcrumb.vue */ 753))
     },
     uniNoticeBar: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar */ "uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar.vue */ 732))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar */ "uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar.vue */ 760))
     },
     uniStatTabs: function () {
-      return __webpack_require__.e(/*! import() | components/uni-stat-tabs/uni-stat-tabs */ "components/uni-stat-tabs/uni-stat-tabs").then(__webpack_require__.bind(null, /*! @/components/uni-stat-tabs/uni-stat-tabs.vue */ 739))
+      return __webpack_require__.e(/*! import() | components/uni-stat-tabs/uni-stat-tabs */ "components/uni-stat-tabs/uni-stat-tabs").then(__webpack_require__.bind(null, /*! @/components/uni-stat-tabs/uni-stat-tabs.vue */ 767))
     },
     uniTable: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 746))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 774))
     },
     uniTr: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-tr/uni-tr */ "uni_modules/uni-table/components/uni-tr/uni-tr").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-tr/uni-tr.vue */ 753))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-tr/uni-tr */ "uni_modules/uni-table/components/uni-tr/uni-tr").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-tr/uni-tr.vue */ 781))
     },
     uniTh: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-th/uni-th */ "uni_modules/uni-table/components/uni-th/uni-th").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-th/uni-th.vue */ 760))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-th/uni-th */ "uni_modules/uni-table/components/uni-th/uni-th").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-th/uni-th.vue */ 788))
     },
     uniTd: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-td/uni-td */ "uni_modules/uni-table/components/uni-td/uni-td").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-td/uni-td.vue */ 767))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-td/uni-td */ "uni_modules/uni-table/components/uni-td/uni-td").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-td/uni-td.vue */ 795))
     },
     fixWindow: function () {
-      return __webpack_require__.e(/*! import() | components/fix-window/fix-window */ "components/fix-window/fix-window").then(__webpack_require__.bind(null, /*! @/components/fix-window/fix-window.vue */ 774))
+      return __webpack_require__.e(/*! import() | components/fix-window/fix-window */ "components/fix-window/fix-window").then(__webpack_require__.bind(null, /*! @/components/fix-window/fix-window.vue */ 802))
     },
   }
 } catch (e) {
@@ -201,7 +201,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 30));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _util = __webpack_require__(/*! @/js_sdk/uni-stat/util.js */ 77);
 var _fieldsMap = __webpack_require__(/*! ./fieldsMap.js */ 78);

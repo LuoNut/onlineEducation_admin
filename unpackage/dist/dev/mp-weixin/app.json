@@ -33,7 +33,10 @@
     "uni_modules/uni-id-pages/pages/userinfo/realname-verify/realname-verify",
     "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/add",
     "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/edit",
-    "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/list"
+    "uni_modules/uni-feedback-admin/pages/uni-feedback-admin/list",
+    "pages/course_video/add",
+    "pages/course_video/edit",
+    "pages/course_video/list"
   ],
   "subPackages": [
     {

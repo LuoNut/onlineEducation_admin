@@ -13,6 +13,9 @@
         <download-excel class="hide-on-phone" :fields="exportExcel.fields" :data="exportExcelData" :type="exportExcel.type" :name="exportExcel.filename">
           <button class="uni-button" type="primary" size="mini">导出 Excel</button>
         </download-excel>
+		<view class="deriveExcel" @click="deriveQuestions">
+			<button class="uni-button" type="primary" size="mini">导入 题目</button>
+		</view>
       </view>
     </view>
     <view class="uni-container">
@@ -63,6 +66,7 @@
 
 <script>
   import { enumConverter, filterToWhere } from '../../js_sdk/validator/question_bank.js';
+  import XLSX from '@/common/js/xlsx.core.min.js'
 
   const db = uniCloud.database()
   // 表查询配置
@@ -101,7 +105,7 @@
           "type": "xls",
           "fields": {
             "user_id": "user_id",
-            " ": "subject_type_one",
+            "题目大类型": "subject_type_one",
             "题目小类型": "subject_type_two",
             "题目": "title",
             "题目类型": "isimg",
@@ -124,6 +128,85 @@
       this.$refs.udb.loadData()
     },
     methods: {
+		//导入excel的功能函数
+		deriveQuestions() {
+			uni.chooseFile({
+				count: 1,
+				extension: ['.xls', '.xlsx'],
+				success: res => {
+					console.log('1');
+					let reader = new FileReader();
+					reader.onload = e => {
+						const data = e.target.result
+						this.process(data) // data为binary数据
+					};
+					reader.readAsBinaryString(res.tempFiles[0]);
+				}
+			})	
+		},
+		//解析excel的功能函数
+		
+		process(data){
+			uni.showLoading({
+				title:"上传中......"
+			})
+			let workbook = XLSX.read(data, {
+				type: "binary"
+			});
+			const sheetName = workbook.SheetNames[0]
+			let sheet = workbook.Sheets[sheetName]
+			const options = {
+				raw: false // 如果不加raw:true的话日期会被读成数字，根据开发需求决定
+			}
+			const rawData = XLSX.utils.sheet_to_json(sheet, options);
+			console.log(rawData);
+			rawData.forEach(item => {
+				console.log(item);
+				console.log(item.true_option);
+				let arr = item.true_option.split(",")
+				let testList = []
+				testList.push( {
+					name:item.a_option,
+					code: item.true_option.indexOf("A") != -1 ? true :false,
+					click_index:false
+				})
+				testList.push( {
+					name:item.b_option,
+					code: item.true_option.indexOf("B") != -1 ? true :false,
+					click_index:false
+				})
+				testList.push( {
+					name:item.c_option,
+					code: item.true_option.indexOf("C") != -1 ? true :false,
+					click_index:false
+				})
+				testList.push( {
+					name:item.d_option,
+					code: item.true_option.indexOf("D") != -1 ? true :false,
+					click_index:false
+				})
+				
+				db.collection("question_bank").add({
+					subject_type_one:item.subject_type_one,
+					subject_type_two:item.subject_type_two,
+					title:item.title,
+					isimg:item.isimg,
+					code:item.code,
+					alt:item.alt,
+					option:['A','B','C','D'],
+					testList:testList,
+					true_option:arr
+				}).then(res => {
+					console.log(res);
+					uni.hideLoading()
+					uni.showToast({
+						title:"上传成功！"
+					})
+					
+				})
+			})
+			// do something
+		},
       onqueryload(data) {
         this.exportExcelData = data
       },

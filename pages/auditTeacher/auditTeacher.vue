@@ -60,6 +60,7 @@
 						</uni-td>
 						<uni-td align="center">
 							<view class="uni-group">
+								<button @click="confirmDelete(item._id)" class="uni-button" size="mini" type="warn">不通过</button>
 								<button @click="getApproved(item._id)" class="uni-button" size="mini"
 									type="primary">通过审核</button>
 							</view>
@@ -118,7 +119,7 @@
 	export default {
 		data() {
 			return {
-				collectionList: [ db.collection('uni-id-users').where(" 'teacher' == userType").field('ali_openid,apple_openid,avatar,avatar_file,comment,dcloud_appid,department_id,email,email_confirmed,gender,invite_time,inviter_uid,last_login_date,last_login_ip,mobile,mobile_confirmed,my_invite_code,nickname,role,score,status,username,wx_unionid,qq_unionid,tags').getTemp(),db.collection('uni-id-roles').field('role_id, role_name').getTemp() ],
+				collectionList: [ db.collection('uni-id-users').where(" 'teacher' == userType &&  role == null").field('ali_openid,apple_openid,avatar,avatar_file,comment,dcloud_appid,department_id,email,email_confirmed,gender,invite_time,inviter_uid,last_login_date,last_login_ip,mobile,mobile_confirmed,my_invite_code,nickname,role,score,status,username,wx_unionid,qq_unionid,tags').getTemp(),db.collection('uni-id-roles').field('role_id, role_name').getTemp() ],
 				query: '',
 				where: '',
 				orderby: dbOrderBy,
@@ -233,13 +234,26 @@
 			
 			//通过审核的功能函数
 			getApproved(e) {
-				uniCloud.callFunction({
-				    name: 'user-center',
-				    data: {e}
-				  })
-				  .then(res => {
-					  console.log(res);
-				  });
+				uni.showModal({
+					title:"是否确定通过?",
+					success: (succ) => {
+						console.log(e)
+						if(succ.confirm) {
+							uniCloud.callFunction({
+							    name: 'user-center',
+							    data: {e}
+							  })
+							  .then(res => {
+								  console.log(res);
+							  });
+							
+							
+						}
+				
+					}
+				})
+				console.log(e);
+				
 			},
 			
 			
@@ -348,11 +362,13 @@
 			selectionChange(e) {
 				this.selectedIndexs = e.detail.index
 			},
-			confirmDelete(id) {
-				this.$refs.udb.remove(id, {
-					success: (res) => {
-						this.$refs.table.clearSelection()
-					}
+			async confirmDelete(id) {
+				console.log(id);
+				let res = await db.collection("uni-id-users").where(`"${id}" == _id`).update({
+					userType: "student"
+				})
+				uni.showToast({
+					title:"操作成功!"
 				})
 			},
 			sortChange(e, name) {

@@ -224,6 +224,24 @@
         "navigationBarTitleText": "列表"
     }
 }
+,{
+    "path": "pages/course_video/add",
+    "style": {
+        "navigationBarTitleText": "新增"
+    }
+}
+,{
+    "path": "pages/course_video/edit",
+    "style": {
+        "navigationBarTitleText": "编辑"
+    }
+}
+,{
+    "path": "pages/course_video/list",
+    "style": {
+        "navigationBarTitleText": "列表"
+    }
+}
 ],
 	"subPackages": [{
 			"root": "pages/system",

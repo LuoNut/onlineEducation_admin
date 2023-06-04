@@ -100,31 +100,31 @@ var components
 try {
   components = {
     downloadExcel: function () {
-      return Promise.all(/*! import() | components/download-excel/download-excel */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/download-excel/download-excel")]).then(__webpack_require__.bind(null, /*! @/components/download-excel/download-excel.vue */ 953))
+      return Promise.all(/*! import() | components/download-excel/download-excel */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/download-excel/download-excel")]).then(__webpack_require__.bind(null, /*! @/components/download-excel/download-excel.vue */ 981))
     },
     unicloudDb: function () {
-      return Promise.all(/*! import() | node-modules/@dcloudio/uni-cli-shared/components/unicloud-db */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-cli-shared/components/unicloud-db")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-cli-shared/components/unicloud-db.vue */ 810))
+      return Promise.all(/*! import() | node-modules/@dcloudio/uni-cli-shared/components/unicloud-db */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-cli-shared/components/unicloud-db")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-cli-shared/components/unicloud-db.vue */ 838))
     },
     uniTable: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 746))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 774))
     },
     uniTr: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-tr/uni-tr */ "uni_modules/uni-table/components/uni-tr/uni-tr").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-tr/uni-tr.vue */ 753))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-tr/uni-tr */ "uni_modules/uni-table/components/uni-tr/uni-tr").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-tr/uni-tr.vue */ 781))
     },
     uniTh: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-th/uni-th */ "uni_modules/uni-table/components/uni-th/uni-th").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-th/uni-th.vue */ 760))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-th/uni-th */ "uni_modules/uni-table/components/uni-th/uni-th").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-th/uni-th.vue */ 788))
     },
     uniTd: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-td/uni-td */ "uni_modules/uni-table/components/uni-td/uni-td").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-td/uni-td.vue */ 767))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-td/uni-td */ "uni_modules/uni-table/components/uni-td/uni-td").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-td/uni-td.vue */ 795))
     },
     uniFilePicker: function () {
-      return Promise.all(/*! import() | uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker.vue */ 861))
+      return Promise.all(/*! import() | uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker.vue */ 889))
     },
     uniLink: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-link/components/uni-link/uni-link */ "uni_modules/uni-link/components/uni-link/uni-link").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-link/components/uni-link/uni-link.vue */ 959))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-link/components/uni-link/uni-link */ "uni_modules/uni-link/components/uni-link/uni-link").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-link/components/uni-link/uni-link.vue */ 987))
     },
     uniPagination: function () {
-      return Promise.all(/*! import() | uni_modules/uni-pagination/components/uni-pagination/uni-pagination */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-pagination/components/uni-pagination/uni-pagination")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-pagination/components/uni-pagination/uni-pagination.vue */ 834))
+      return Promise.all(/*! import() | uni_modules/uni-pagination/components/uni-pagination/uni-pagination */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-pagination/components/uni-pagination/uni-pagination")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-pagination/components/uni-pagination/uni-pagination.vue */ 862))
     },
   }
 } catch (e) {
@@ -242,6 +242,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _question_bank = __webpack_require__(/*! ../../js_sdk/validator/question_bank.js */ 285);
+var _xlsxMini = _interopRequireDefault(__webpack_require__(/*! @/common/js/xlsx.mini.js */ 302));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var db = uniCloud.database();
@@ -278,7 +279,7 @@ var _default = {
         "type": "xls",
         "fields": {
           "user_id": "user_id",
-          " ": "subject_type_one",
+          "题目大类型": "subject_type_one",
           "题目小类型": "subject_type_two",
           "题目": "title",
           "题目类型": "isimg",
@@ -301,6 +302,62 @@ var _default = {
     this.$refs.udb.loadData();
   },
   methods: {
+    //导入excel的功能函数
+    deriveQuestions: function deriveQuestions() {
+      var _this = this;
+      uni.chooseFile({
+        count: 1,
+        extension: ['.xls', '.xlsx'],
+        success: function success(res) {
+          console.log('1');
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var data = e.target.result;
+            _this.process(data); // data为binary数据
+          };
+
+          reader.readAsBinaryString(res.tempFiles[0]);
+        }
+      });
+    },
+    //解析excel的功能函数
+    process: function process(data) {
+      uni.showLoading({
+        title: "上传中......"
+      });
+      var workbook = _xlsxMini.default.read(data, {
+        type: "binary"
+      });
+      var sheetName = workbook.SheetNames[0];
+      var sheet = workbook.Sheets[sheetName];
+      var options = {
+        raw: false // 如果不加raw:true的话日期会被读成数字，根据开发需求决定
+      };
+
+      var rawData = _xlsxMini.default.utils.sheet_to_json(sheet, options);
+      console.log(rawData);
+      rawData.forEach(function (item) {
+        console.log(item);
+        console.log(item.true_option);
+        var arr = item.true_option.split(",");
+        db.collection("question_bank").add({
+          subject_type_one: item.subject_type_one,
+          subject_type_two: item.subject_type_two,
+          title: item.title,
+          isimg: item.isimg,
+          code: item.code,
+          alt: item.alt,
+          true_option: arr
+        }).then(function (res) {
+          console.log(res);
+          uni.hideLoading();
+          uni.showToast({
+            title: "上传成功！"
+          });
+        });
+      });
+      // do something
+    },
     onqueryload: function onqueryload(data) {
       this.exportExcelData = data;
     },
@@ -315,11 +372,11 @@ var _default = {
       }).join(' || ');
     },
     search: function search() {
-      var _this = this;
+      var _this2 = this;
       var newWhere = this.getWhere();
       this.where = newWhere;
       this.$nextTick(function () {
-        _this.loadData();
+        _this2.loadData();
       });
     },
     loadData: function loadData() {
@@ -336,13 +393,13 @@ var _default = {
       });
     },
     navigateTo: function navigateTo(url, clear) {
-      var _this2 = this;
+      var _this3 = this;
       // clear 表示刷新列表时是否清除页码，true 表示刷新并回到列表第 1 页，默认为 true
       uni.navigateTo({
         url: url,
         events: {
           refreshData: function refreshData() {
-            _this2.loadData(clear);
+            _this3.loadData(clear);
           }
         }
       });
@@ -356,10 +413,10 @@ var _default = {
     },
     // 批量删除
     delTable: function delTable() {
-      var _this3 = this;
+      var _this4 = this;
       this.$refs.udb.remove(this.selectedItems(), {
         success: function success(res) {
-          _this3.$refs.table.clearSelection();
+          _this4.$refs.table.clearSelection();
         }
       });
     },
@@ -368,15 +425,15 @@ var _default = {
       this.selectedIndexs = e.detail.index;
     },
     confirmDelete: function confirmDelete(id) {
-      var _this4 = this;
+      var _this5 = this;
       this.$refs.udb.remove(id, {
         success: function success(res) {
-          _this4.$refs.table.clearSelection();
+          _this5.$refs.table.clearSelection();
         }
       });
     },
     sortChange: function sortChange(e, name) {
-      var _this5 = this;
+      var _this6 = this;
       this.orderByFieldName = name;
       if (e.order) {
         this.orderby = name + ' ' + orderByMapping[e.order];
@@ -385,11 +442,11 @@ var _default = {
       }
       this.$refs.table.clearSelection();
       this.$nextTick(function () {
-        _this5.$refs.udb.loadData();
+        _this6.$refs.udb.loadData();
       });
     },
     filterChange: function filterChange(e, name) {
-      var _this6 = this;
+      var _this7 = this;
       this._filter[name] = {
         type: e.filterType,
         value: e.filter
@@ -401,7 +458,7 @@ var _default = {
         this.where = '';
       }
       this.$nextTick(function () {
-        _this6.$refs.udb.loadData();
+        _this7.$refs.udb.loadData();
       });
     }
   }
